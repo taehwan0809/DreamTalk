@@ -222,7 +222,8 @@ app.post('/login',nullCheck2, async(req,res,next)=>{
 
 app.get('/list', async(req,res)=>{
     const listPost = await Posts.findAll()
-    res.render('list.ejs', {posts:listPost})
+    const user = req.user ? req.user.user_id : null;
+    res.render('list.ejs', {posts:listPost, user:user})
 })
 // 게시글 리스트
 
@@ -234,11 +235,11 @@ app.get('/detail/:id', async(req,res)=>{
 
 
 
-app.post('/delete', async(req,res)=>{
+app.delete('/delete', async(req,res)=>{
     await Posts.destroy({where:{post_id:req.query.docid}});
-    res.send("<script>alert('삭제 완료');window.loaction.replace('/list');</script>")
+    res.json({msg:'삭제 성공'})
 })
-
+// 삭제
 
 
 app.get('/write', async(req,res)=>{
@@ -250,12 +251,27 @@ app.post('/write',upload.single('img'), async(req, res) => {
     if(!req.user){
         res.send('로그인 먼저 해주세요')
     }else{
+        if(!req.file){
+        await Posts.create({title: req.body.title, content: req.body.content,user_id: req.user.user_id, image_url: null});
+        console.log("성공")
+        res.redirect('/')
+        }else{
         await Posts.create({title: req.body.title, content: req.body.content,user_id: req.user.user_id, image_url: req.file.location});
         console.log("성공")
         res.redirect('/')
+        }
     }
     }catch(error){
         console.error(error)
     }
 })
 // 게시글 전송
+
+app.get('/update/:id', async(req,res)=>{
+    const list = await Posts.findOne({post_})
+    res.render('update.ejs', {posts:list})
+})
+
+app.put('/update/:id', async(req,res)=>{
+    await Posts.update({title:req.body.title, content:req.body.content},{where:{post_id: req.params.id}})
+})
