@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-
-    <form class="post-box" action="/update/<%" method="post" enctype="multipart/form-data">
-        <input name="title" value=""/>
-        <input name="content"/>
-        <input type="file" name="img" accept = "image/* multiple"/>
-        <button type="submit">제발...</button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DreamTalk</title>
+  </head>
+  <body>
+    <form
+      class="post-box"
+      action="/update/<%=posts.post_id%>?_method=PUT"
+      method="post"
+      enctype="multipart/form-data"
+    >
+      <h4>수정하기</h4>
+      <input type="text" name="title" value="<%=posts.title%>" />
+      <input type="text" name="content" value="<%=posts.content%>" />
+      <img src="<%=posts.image_url%>" width="200" />
+      <input type="file" name="img" />
+      <button type="submit">수정 완료</button>
     </form>
-
-
-
-</body>
+  </body>
 </html>

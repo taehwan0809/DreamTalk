@@ -1,0 +1,105 @@
+body{
+    margin: 0;
+}
+
+a{
+    text-decoration: none;
+    color: #4a4a4a;
+}
+
+
+
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fffef9;
+    padding: 8px 12px;
+}
+
+.nav_logo {
+    font-size: 30px;
+}
+
+.nav_logo a {
+    font-family: "Jua", sans-serif;
+    font-weight: 500;
+    color: #6FA8DC;
+    padding-left: 50px;
+}
+
+.nav_menu{
+    display: flex;
+    list-style: none;
+    padding-left: 0;
+}
+
+.nav_menu li{
+    padding: 8px 35px;
+}
+
+.nav_menu li a:hover{
+    color: #6FA8DC;
+}
+
+
+
+
+.nav_icons {
+    list-style: none;
+    color: #4a4a4a;
+    display: flex;
+}
+
+.nav_icons li{
+    padding: 8px 30px;
+    font-size: 20px;
+}
+
+
+.navbar_toggleBtn{
+    display: none;
+    position: absolute;
+    right: 32px;
+    font-size: 24px;
+
+}
+
+
+@media screen and (max-width: 768px){
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav_menu{
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .nav_menu li{
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav_icons{
+        display: none;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .navbar_toggleBtn{
+        display: block;
+    }
+
+
+    .nav_menu.active,
+    .nav_icons.active{
+        display: flex;
+    }
+}
+
+
+

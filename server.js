@@ -10,6 +10,7 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const {S3Client} = require('@aws-sdk/client-s3');
 const multer = require('multer');
 const multerS3 = require('multer-s3');
+const methodOverride = require('method-override')
 const s3 = new S3Client({
     region: 'ap-northeast-2',
     credentials:{
@@ -36,12 +37,15 @@ const store = new SequelizeStore({
 
 store.sync();
 
+
+
+
+
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 // req.body를 받기 위한 코드
 
 
-// 브라우저가 localhost:8080을 막지 않도록 하기 위한 코드
 app.use(passport.initialize());
 app.use(session({
     secret: process.env.SESSION_PW,
@@ -53,6 +57,7 @@ app.use(session({
 app.use(passport.session());
 
 
+app.use(methodOverride('_method'))
 
 
 app.listen(8080, ()=>{
@@ -177,7 +182,7 @@ function nullCheck2(req,res,next){
 app.get('/', async(req,res) => {
     res.render('main.ejs')
 })
-
+// 메인 페이지
 
 app.get('/sign', async(req,res)=>{
     res.render('sign.ejs');
@@ -191,7 +196,7 @@ app.post('/sign', nullCheck, async(req,res)=>{
                 let hash = await bcrypt.hash(req.body.password,10)
                 await Users.create({email: req.body.email, nickname: req.body.nickname, password: hash})
                 .then(()=>{
-                    res.redirect('/')
+                    res.redirect('/login')
                 })
             }else{
                 res.send("<script>alert('nickname이 이미 존재합니다'); window.location.replace('/sign');</script>")    
@@ -254,11 +259,11 @@ app.post('/write',upload.single('img'), async(req, res) => {
         if(!req.file){
         await Posts.create({title: req.body.title, content: req.body.content,user_id: req.user.user_id, image_url: null});
         console.log("성공")
-        res.redirect('/')
+        res.redirect('/list')
         }else{
         await Posts.create({title: req.body.title, content: req.body.content,user_id: req.user.user_id, image_url: req.file.location});
         console.log("성공")
-        res.redirect('/')
+        res.redirect('/list')
         }
     }
     }catch(error){
@@ -268,10 +273,20 @@ app.post('/write',upload.single('img'), async(req, res) => {
 // 게시글 전송
 
 app.get('/update/:id', async(req,res)=>{
-    const list = await Posts.findOne({post_})
+    const list = await Posts.findOne({where:{post_id: req.params.id}})
     res.render('update.ejs', {posts:list})
 })
 
-app.put('/update/:id', async(req,res)=>{
-    await Posts.update({title:req.body.title, content:req.body.content},{where:{post_id: req.params.id}})
+app.put('/update/:id',upload.single('img'), async(req,res)=>{
+
+    const before = await Posts.findOne({where:{post_id: req.params.id}})
+    if(req.body.img == null){
+        await Posts.update({title:req.body.title, content:req.body.content, image_url:before.image_url},{where:{post_id: req.params.id}});
+        res.send("<script>alert('수정완료!!'); window.location.replace('/list');</script>")
+    }else{
+        await Posts.update({title:req.body.title, content:req.body.content, image_url:req.file.location},{where:{post_id: req.params.id}});
+        res.send("<script>alert('수정완료!!'); window.location.replace('/list');</script>")
+    }
+
+    
 })

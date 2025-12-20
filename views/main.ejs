@@ -1,15 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <button><a href="/login">로그인</a></button>
-    <button><a href="/sign">회원가입</a></button>
-    <button><a href="/list">게시글</a></button>
-    <button><a href="/write">글 작성</a></button>
-    
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DreamTalk</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css"
+    />
+    <style>
+      html,
+      :root {
+        --swiper-theme-color: #6fa8dc;
+      }
+      body {
+        position: relative;
+        height: 100%;
+      }
+
+      body {
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        color: #fff;
+        margin: 0;
+        padding: 0;
+      }
+
+      .swiper {
+        box-sizing: border-box;
+        max-width: 2560px;
+        margin: 0 auto;
+        height: 800px;
+        min-height: initial;
+        max-height: 800px;
+        display: block;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .swiper-slide {
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        overflow: hidden;
+      }
+      /* 
+      @media screen and (min-width: 1025px) and (max-width: 1440px) {
+        .swiper {
+          height: 450px;
+        }
+      } */
+
+      .swiper-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+      .swiper-pagination .swiper-pagination-bullet {
+        color: #6fa8dc;
+      }
+      .swiper-button-prev {
+        color: #6fa8dc;
+      }
+
+      .swiper-button-next {
+        color: #6fa8dc;
+      }
+    </style>
+  </head>
+  <body style="margin: 0">
+    <%-include('nav.ejs')%>
+
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide"><img src="/img/dream.jpg" /></div>
+        <div class="swiper-slide"><img src="/img/friends.jpg" /></div>
+        <div class="swiper-slide"><img src="/img/talking.jpg" /></div>
+      </div>
+      <!-- Add Pagination -->
+      <div class="swiper-pagination"></div>
+      <!-- Add Navigation -->
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+
+    <script>
+      function myPlugin({ swiper, extendParams, on }) {
+        extendParams({
+          debugger: false,
+        });
+      }
+      var swiper = new Swiper(".swiper", {
+        // Install Plugin To Swiper
+        modules: [myPlugin],
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        loop: true,
+        effect: "slide",
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+        // Enable debugger
+        debugger: true,
+      });
+    </script>
+  </body>
 </html>
