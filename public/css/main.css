@@ -18,7 +18,7 @@ a{
 }
 
 .nav_logo {
-    font-size: 30px;
+    font-size: 45px;
 }
 
 .nav_logo a {
@@ -26,6 +26,7 @@ a{
     font-weight: 500;
     color: #6FA8DC;
     padding-left: 50px;
+    
 }
 
 .nav_menu{
@@ -35,7 +36,8 @@ a{
 }
 
 .nav_menu li{
-    padding: 8px 35px;
+    padding: 10px 35px;
+    font-size: large;
 }
 
 .nav_menu li a:hover{
@@ -49,6 +51,7 @@ a{
     list-style: none;
     color: #4a4a4a;
     display: flex;
+    padding-left: 0;
 }
 
 .nav_icons li{
@@ -56,6 +59,9 @@ a{
     font-size: 20px;
 }
 
+.nav_icons li a:hover{
+    color: #6FA8DC;
+}
 
 .navbar_toggleBtn{
     display: none;

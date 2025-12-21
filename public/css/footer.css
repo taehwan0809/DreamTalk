@@ -1,0 +1,35 @@
+.footer{
+    background-color: #fffef9;
+    padding: 3rem 1.5rem 3rem;
+    margin-top: 8vh;
+    box-shadow: 0 -15px 15px rgba(0,0,0,0.05);
+}
+
+.content p{
+    color: #4a4a4a;
+    text-align: center;
+    margin-top: 4vh;
+    font-size: 1.3vh;
+
+}
+
+.content{
+    justify-content: center;
+}
+
+.footer strong{
+    color: #6FA8DC;
+}
+
+.content i{
+    padding-top: 5px;
+    font-size: 25px;
+}
+
+.icon{
+    justify-content: center;
+    display: flex;
+    gap: 1%;
+}
+
+

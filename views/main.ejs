@@ -4,80 +4,39 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DreamTalk</title>
+
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css"
     />
-    <style>
-      html,
-      :root {
-        --swiper-theme-color: #6fa8dc;
-      }
-      body {
-        position: relative;
-        height: 100%;
-      }
-
-      body {
-        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-        font-size: 14px;
-        color: #fff;
-        margin: 0;
-        padding: 0;
-      }
-
-      .swiper {
-        box-sizing: border-box;
-        max-width: 2560px;
-        margin: 0 auto;
-        height: 800px;
-        min-height: initial;
-        max-height: 800px;
-        display: block;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .swiper-slide {
-        z-index: 1;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        overflow: hidden;
-      }
-      /* 
-      @media screen and (min-width: 1025px) and (max-width: 1440px) {
-        .swiper {
-          height: 450px;
-        }
-      } */
-
-      .swiper-slide img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center;
-      }
-      .swiper-pagination .swiper-pagination-bullet {
-        color: #6fa8dc;
-      }
-      .swiper-button-prev {
-        color: #6fa8dc;
-      }
-
-      .swiper-button-next {
-        color: #6fa8dc;
-      }
-    </style>
+    <link rel="stylesheet" href="/css/slide.css" />
+    <link rel="stylesheet" href="/css/card.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   </head>
   <body style="margin: 0">
     <%-include('nav.ejs')%>
 
     <div class="swiper">
       <div class="swiper-wrapper">
-        <div class="swiper-slide"><img src="/img/dream.jpg" /></div>
-        <div class="swiper-slide"><img src="/img/friends.jpg" /></div>
-        <div class="swiper-slide"><img src="/img/talking.jpg" /></div>
+        <div class="swiper-slide">
+          <img src="/img/dream.jpg" />
+          <h1 class="title1">진로 고민,</h1>
+          <h1 class="title2">혼자가 아니에요</h1>
+          <h4 class="content1">다양한 경험과 따뜻한 응원을 나누세요</h4>
+        </div>
+
+        <div class="swiper-slide">
+          <img src="/img/friends.jpg" />
+          <h1 class="title3">자신만의 고민을</h1>
+          <h1 class="title4">편히 털어보아요</h1>
+          <h4 class="content2">숙련자와 전문가에게 질문하세요</h4>
+        </div>
+        <div class="swiper-slide">
+          <img src="/img/talking.jpg" />
+          <h1 class="title5">더 이상,</h1>
+          <h1 class="title6">혼자 생각하지 마세요</h1>
+          <h4 class="content3">두려워하지 말고 나누세요</h4>
+        </div>
       </div>
       <!-- Add Pagination -->
       <div class="swiper-pagination"></div>
@@ -85,10 +44,55 @@
       <div class="swiper-button-prev"></div>
       <div class="swiper-button-next"></div>
     </div>
+    <!-- 슬라이드 라이브러리 swiper.js -->
+
+    <div class="info-dreamtalk">
+      <h3>드림톡에서 할 수 있는 일</h3>
+      <p>
+        진로와 꿈에 대한 고민을 자유롭게 나누고<br />경험 있는 선배들의 조언을
+        받아보세요
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="cardImage">
+        <img
+          src="/img/worry.png"
+          data-aos="fade-up"
+          data-aos-duration="1000"
+          data-aos-once="true"
+        />
+        <h3>고민 작성하기</h3>
+        <p>진로, 학업, 미래에 대한<br />고민을 자유롭게 작성해보세요</p>
+      </div>
+      <div class="cardImage">
+        <img
+          src="/img/advice.png"
+          data-aos="fade-up"
+          data-aos-duration="1000"
+          data-aos-once="true"
+        />
+        <h3>조언 받기</h3>
+        <p>경험 있는 선배들과<br />멘토들의 따뜻한 조언을 받아보세요</p>
+      </div>
+      <div class="cardImage">
+        <img
+          src="/img/grown.png"
+          data-aos="fade-up"
+          data-aos-duration="1000"
+          data-aos-once="true"
+        />
+        <h3>함께 성장하기</h3>
+        <p>다른 친구들의 이야기를 보며<br />새로운 관점을 얻어보세요</p>
+      </div>
+    </div>
+    <!-- AOS라는 스크롤 애니메이션 라이브러리 -->
+    <%-include('footer.ejs') %>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
-
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
+      AOS.init();
       function myPlugin({ swiper, extendParams, on }) {
         extendParams({
           debugger: false,

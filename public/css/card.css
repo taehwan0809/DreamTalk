@@ -1,0 +1,53 @@
+      .info-dreamtalk {
+        color: #4a4a4a;
+        justify-items: center;
+        margin-top: 5%;
+      }
+
+      .info-dreamtalk h3 {
+        color: #6fa8dc;
+        font-size: 4vh;
+        margin-bottom: 0;
+      }
+
+      .info-dreamtalk p {
+        font-size: 2vh;
+        text-align: center;
+      }
+
+      .card {
+        display: flex;
+        margin-top: 5%;
+        justify-content: center;
+        object-fit: cover;
+        gap: 7%;
+      }
+      .cardImage {
+        color: #4a4a4a;
+        text-align: center;
+      }
+
+      .cardImage img {
+        width: 40vh;
+        height: 40vh;
+        border-radius: 10px;
+      }
+
+      .cardImage h3 {
+        color: #6fa8dc;
+        font-size: 3vh;
+        margin-bottom: 17px;
+      }
+      .cardImage p {
+        font-size: 2vh;
+        margin-top: 0;
+      }
+
+            @media screen and (max-width: 768px) {
+        .card {
+          flex-direction: column;
+        }
+        .info-dreamtalk h3 {
+          font-size: 2.5vh;
+        }
+      }
