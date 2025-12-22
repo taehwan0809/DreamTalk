@@ -17,7 +17,7 @@
 
       .swiper {
         box-sizing: border-box;
-        max-width: 2560px;
+        max-width: 100%;
         margin: 0 auto;
         height: 800px;
         min-height: initial;
@@ -61,28 +61,28 @@
         top: 55%;
       }
       .title1 {
-        font-size: 60px;
+        font-size: 4vw;
         position: absolute;
         left: 16%;
         top: 30%;
       }
 
       .title2 {
-        font-size: 60px;
+        font-size: 4vw;
         position: absolute;
         left: 16%;
         top: 39%;
       }
 
       .title3 {
-        font-size: 60px;
+        font-size: 4vw;
         position: absolute;
         left: 43%;
         top: 3%;
       }
 
       .title4 {
-        font-size: 60px;
+        font-size: 4vw;
         position: absolute;
         left: 43%;
         top: 13%;
@@ -96,14 +96,14 @@
       }
 
       .title5 {
-        font-size: 60px;
+        font-size: 4vw;
         position: absolute;
         left: 23%;
         top: 41%;
       }
 
       .title6 {
-        font-size: 60px;
+        font-size: 4vw;
         position: absolute;
         left: 65%;
         top: 41%;
@@ -116,30 +116,11 @@
         top: 49%;
       }
 
-      @media screen and (max-width: 768px) {
-        .title3 {
-          left: 20%;
-        }
-        .title4 {
-          left: 34%;
-          top: 14%;
-        }
-        .content2 {
-          top: 43%;
-        }
-        .title5 {
-          top: 26%;
-          left: 30%;
-        }
-        .title6 {
-          left: 18%;
-          top: 57%;
-        }
-        .content3 {
-          left: 35%;
-        }
-      }
-
       .swiper-button-next {
         color: #6fa8dc;
+      }
+
+
+      .title1, .title2, .title3, .title4, .title5, .title6{
+        white-space: nowrap;
       }
