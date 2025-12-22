@@ -10,6 +10,7 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const {S3Client} = require('@aws-sdk/client-s3');
 const multer = require('multer');
 const multerS3 = require('multer-s3');
+const dayjs = require("dayjs");
 const methodOverride = require('method-override')
 const s3 = new S3Client({
     region: 'ap-northeast-2',
@@ -85,7 +86,7 @@ const Posts = db.sequelize.define('posts', {
     image_url: {type: DataTypes.STRING(500)},
     category: {type: DataTypes.STRING(50)}
     },{
-        timestamps: false,
+        timestamps: true,
         createdAt: 'created_at',
         updatedAt: false
     })
@@ -196,7 +197,7 @@ app.post('/sign', nullCheck, async(req,res)=>{
                 let hash = await bcrypt.hash(req.body.password,10)
                 await Users.create({email: req.body.email, nickname: req.body.nickname, password: hash})
                 .then(()=>{
-                    res.redirect('/login')
+                    res.send("<script>alert('회원가입 성공!!');window.location.replace('/login');</script>")
                 })
             }else{
                 res.send("<script>alert('nickname이 이미 존재합니다'); window.location.replace('/sign');</script>")    
@@ -234,7 +235,10 @@ app.get('/list', async(req,res)=>{
 
 app.get('/detail/:id', async(req,res)=>{
     let post = await Posts.findOne({where:{post_id: req.params.id}})
-    res.render('detail.ejs', {detailPost:post})
+    let user = await Users.findOne({where:{user_id: post.user_id}})
+    let date = dayjs(post.created_at)
+    let postDate = date.format("YYYY-MM-DD");
+    res.render('detail.ejs', {detailPost:post, user:user, postDate :postDate})
 })
 // 상세 페이지
 
