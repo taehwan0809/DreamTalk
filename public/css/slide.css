@@ -61,28 +61,28 @@
         top: 55%;
       }
       .title1 {
-        font-size: 4vw;
+        font-size: clamp(30px, 4vw, 60px);
         position: absolute;
         left: 16%;
         top: 30%;
       }
 
       .title2 {
-        font-size: 4vw;
+        font-size: clamp(30px, 4vw, 60px);
         position: absolute;
         left: 16%;
         top: 39%;
       }
 
       .title3 {
-        font-size: 4vw;
+        font-size: clamp(30px, 4vw, 60px);
         position: absolute;
         left: 43%;
         top: 3%;
       }
 
       .title4 {
-        font-size: 4vw;
+        font-size:clamp(30px, 4vw, 60px);
         position: absolute;
         left: 43%;
         top: 13%;
@@ -96,14 +96,14 @@
       }
 
       .title5 {
-        font-size: 4vw;
+        font-size:clamp(30px, 4vw, 60px);
         position: absolute;
         left: 23%;
         top: 41%;
       }
 
       .title6 {
-        font-size: 4vw;
+        font-size:clamp(30px, 4vw, 60px);
         position: absolute;
         left: 65%;
         top: 41%;
