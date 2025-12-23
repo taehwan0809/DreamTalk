@@ -229,7 +229,7 @@ app.post('/login',nullCheck2, async(req,res,next)=>{
 app.get('/list', async(req,res)=>{
     const listPost = await Posts.findAll()
     const user = req.user ? req.user.user_id : null;
-    res.render('list.ejs', {posts:listPost, user:user})
+    res.render('list.ejs', {posts:listPost, user:user, dayjs:dayjs})
 })
 // 게시글 리스트
 
@@ -241,6 +241,10 @@ app.get('/detail/:id', async(req,res)=>{
     res.render('detail.ejs', {detailPost:post, user:user, postDate :postDate})
 })
 // 상세 페이지
+        // <% if(posts[i].user_id == user){ %>
+        // <span class="delete" data-id="<%=posts[i].post_id%>">삭제</span>
+        // <span><a href="/update/<%=posts[i].post_id%>">수정</a></span>
+        // <%}%>
 
 
 

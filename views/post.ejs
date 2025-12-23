@@ -4,18 +4,29 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DreamTalk</title>
+    <link rel="stylesheet" href="/css/post.css" />
   </head>
   <body>
-    <form
-      class="post-box"
-      action="/write"
-      method="post"
-      enctype="multipart/form-data"
-    >
-      <input name="title" />
-      <input name="content" />
-      <input type="file" name="img" accept="image/* multiple" />
-      <button type="submit">작성 완료</button>
-    </form>
+    <%-include('nav.ejs')%>
+    <div class="postBox">
+      <form
+        class="post-box"
+        action="/write"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        <div class="titleBox">
+          <input name="title" required />
+          <label class="titleLabel">제목</label>
+          <span></span>
+        </div>
+        <div class="contentBox">
+          <input name="content" />
+          <input type="file" name="img" accept="image/* multiple" />
+        </div>
+        <button type="submit">작성 완료</button>
+      </form>
+    </div>
+    <%-include('footer.ejs')%>
   </body>
 </html>

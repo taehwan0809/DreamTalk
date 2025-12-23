@@ -1,0 +1,77 @@
+*{
+    margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+body{
+    background-color: #fffef9;
+}
+
+.postBox{
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+}
+.contentBox{
+    margin-top: 42%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #6FA8DC;
+}
+
+.titleBox{
+    position: relative;
+    width: 300px;
+    margin-left: 50px;
+    margin-top: 100px;
+}
+
+.title{
+    font-size: 15px;
+  color: #222222;
+  width: 300px;
+  border: none;
+  border-bottom: solid #aaaaaa 1px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  position: relative;
+  background: none;
+  z-index: 5;
+}
+
+.title::placeholder{color:#aaaaaa;}
+.title::focus{outline: none;}
+
+span{
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0%;
+    background-color: #666;
+    width: 0;
+    height: 2px;
+    border-radius: 2px;
+    transition: 0.5s;
+}
+.titleLabel{
+    position: absolute;
+    color: #aaa;
+    left: 10px;
+    font-size: 20px;
+    bottom: 8px;
+    transition: all .2s;
+}
+
+.title:focus ~ .titleLabel, .title:valid ~ .titleLabel{
+    font-size: 16px;
+    bottom: 40px;
+    color: #666;
+    font-weight: bold;
+}
+
+.title:focus ~ span, .title:valid ~ span{
+    width: 100%;
+}
