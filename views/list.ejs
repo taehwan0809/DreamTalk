@@ -38,13 +38,15 @@
                 <a class="ab-link" href="/detail/<%=posts[i].post_id%>"></a>
               </td>
               <td class="category1">null</td>
-              <td class="date1"><%=dayjs(posts[i].created_at).format('YYYY-MM-DD')%></td>
-              </a>
+              <%if(posts[i].user_id == user){%>
+              <td class="date1"><%=dayjs(posts[i].created_at).format('YYYY-MM-DD')%> <button class="delete" data-id="<%=posts[i].post_id%>">삭제</button><button class="update"><a href="/update/<%=posts[i].post_id%>">수정</a></button></td>
+              <%} else{%>
+                  <td class="date1"><%=dayjs(posts[i].created_at).format('YYYY-MM-DD')%></td>
+              <%}%>
             </tr>
-            <%}%>
+          <%}%>
         </tbody>
       </table>
-      
 <%-include('footer.ejs') %>
 
 
@@ -57,7 +59,7 @@
           })
             .then((r) => r.json())
             .then((r) => {
-              (e.target.parentElement.style.display = "none"), console.log(r);
+              (e.target.parentElement.parentElement.style.display = "none"), console.log(r);
             })
             .then(() => {
               alert("삭제 완료");

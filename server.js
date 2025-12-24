@@ -11,7 +11,8 @@ const {S3Client} = require('@aws-sdk/client-s3');
 const multer = require('multer');
 const multerS3 = require('multer-s3');
 const dayjs = require("dayjs");
-const methodOverride = require('method-override')
+const methodOverride = require('method-override');
+const { comment } = require('postcss');
 const s3 = new S3Client({
     region: 'ap-northeast-2',
     credentials:{
@@ -112,7 +113,8 @@ const Comments = db.sequelize.define('comments', {
     comment_id:{type: DataTypes.INTEGER,primaryKey: true,autoIncrement: true, allowNull: false },
     post_id: {type: DataTypes.INTEGER, allowNull:false},
     user_id: {type: DataTypes.INTEGER, allowNull: false},
-    content: {type: DataTypes.TEXT, allowNull:false}
+    content: {type: DataTypes.TEXT, allowNull:false},
+    nickname: {type: DataTypes.STRING(100), allowNull:false}
 }, {
     timestamps: false,
     createdAt: 'created_at',
@@ -234,19 +236,34 @@ app.get('/list', async(req,res)=>{
 // 게시글 리스트
 
 app.get('/detail/:id', async(req,res)=>{
+    let commentResult = await Comments.findAll({where:{post_id:req.params.id}})
     let post = await Posts.findOne({where:{post_id: req.params.id}})
     let user = await Users.findOne({where:{user_id: post.user_id}})
     let date = dayjs(post.created_at)
     let postDate = date.format("YYYY-MM-DD");
-    res.render('detail.ejs', {detailPost:post, user:user, postDate :postDate})
+    let commentUser = req.user ? req.user.user_id : null;
+    
+    res.render('detail.ejs', {detailPost:post, user:user, postDate :postDate, comments:commentResult, commentUser:commentUser, dayjs:dayjs})
 })
 // 상세 페이지
-        // <% if(posts[i].user_id == user){ %>
-        // <span class="delete" data-id="<%=posts[i].post_id%>">삭제</span>
-        // <span><a href="/update/<%=posts[i].post_id%>">수정</a></span>
-        // <%}%>
 
+app.post('/comment', async(req,res)=>{
+    try{
+    if(!req.user){
+        res.send("<script>alert('로그인 먼저 해주세요!!');window.location.replace('/login')</script>");
+    }else{
+        await Comments.create({user_id: req.user.user_id, content: req.body.content, post_id:req.body.parentId,nickname: req.user.nickname})
+        res.redirect(req.get('Referer'));
+    }}catch(err){
+        console.error(err)
+    }
+})
+// 댓글
 
+app.delete('/deletec', async(req,res)=>{
+    await Comments.destroy({where:{comment_id:req.query.docid}});
+    res.json({msg:'댓글 삭제 성공'})
+})
 
 app.delete('/delete', async(req,res)=>{
     await Posts.destroy({where:{post_id:req.query.docid}});
@@ -298,3 +315,4 @@ app.put('/update/:id',upload.single('img'), async(req,res)=>{
 
     
 })
+

@@ -94,3 +94,23 @@ table{
     left: 0;
     z-index: 1;
 }
+
+
+
+.delete{
+  position: relative;
+  z-index: 2;
+  color: #4a4a4a;
+  
+}
+
+.delete:hover{
+  background-color: red;
+}
+
+
+.update{
+  position: relative;
+  z-index: 2;
+  color: #4a4a4a;
+}

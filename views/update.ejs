@@ -4,20 +4,84 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DreamTalk</title>
+    <link rel="stylesheet" href="/css/post.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Jua&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Jua&family=Momo+Trust+Display&family=Noto+Sans+KR:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
   <body>
-    <form
-      class="post-box"
-      action="/update/<%=posts.post_id%>?_method=PUT"
-      method="post"
-      enctype="multipart/form-data"
-    >
-      <h4>수정하기</h4>
-      <input type="text" name="title" value="<%=posts.title%>" />
-      <input type="text" name="content" value="<%=posts.content%>" />
-      <img src="<%=posts.image_url%>" width="200" />
-      <input type="file" name="img" />
-      <button type="submit">수정 완료</button>
-    </form>
+    <%-include('nav.ejs')%>
+    <div id="board_write">
+      <h4>글 수정하기</h4>
+      <div id="write_area">
+        <form
+          enctype="multipart/form-data"
+          action="/update/<%=posts.post_id%>?_method=PUT"
+          method="post"
+        >
+          <div id="in_title">
+            <textarea
+              name="title"
+              id="utitle"
+              rows="1"
+              cols="55"
+              maxlength="100"
+              required
+            >
+<%=posts.title%></textarea
+            >
+          </div>
+
+          <div id="in_content">
+            <textarea name="content" id="ucontent" required>
+<%=posts.content%></textarea
+            >
+          </div>
+
+          <label>
+            <img src="<%=posts.image_url%>" width="200" />
+            <input
+              class="file_real"
+              type="file"
+              name="img"
+              accept="image/jpeg,image/png"
+            />
+            <input
+              class="file_fake"
+              type="text"
+              placeholder="* jpg, png만 넣어주세요"
+              readonly
+              tabindex="-1"
+            />
+            <span class="button">사진 첨부</span>
+          </label>
+          <button class="btn" type="submit">작성 완료</button>
+        </form>
+      </div>
+    </div>
+    <%-include('footer.ejs')%>
+
+    <script>
+      $(document).ready(function () {
+        $(".file_real").on("change", function () {
+          var files = $(this)[0].files[0];
+          var fake = $(".file_fake");
+
+          fake.val("");
+          if (files != undefined) {
+            fake.val(files.name);
+          }
+        });
+      });
+      // jquery 사용
+    </script>
   </body>
 </html>
