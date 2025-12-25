@@ -13,7 +13,7 @@ body{
   color: #4a4a4a;
 }
 .ab-table{
-  width: 54%;
+  width: 70%;
   border-spacing: 0;
   border-collapse: collapse;
   font-size: inherit;
@@ -51,17 +51,17 @@ body{
 }
 
 .title2{
-  width: 30%;
+  width: 41%;
 }
 
 .content2{
-  width: 30%;
+  width: 19%;
 }
 .category2{
-  width: 20%;
+  width: 10%;
 }
 .date2{
-  width: 20%;
+  width: 30%;
 }
 
 tbody{
