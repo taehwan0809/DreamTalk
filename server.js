@@ -231,9 +231,21 @@ app.post('/login',nullCheck2, async(req,res,next)=>{
 app.get('/list', async(req,res)=>{
     const listPost = await Posts.findAll()
     const user = req.user ? req.user.user_id : null;
-    res.render('list.ejs', {posts:listPost, user:user, dayjs:dayjs})
+    res.render('list.ejs', {
+        posts:listPost,
+        user:user,
+        dayjs:dayjs,
+    })
 })
 // 게시글 리스트
+
+app.get(/^\/category\/(.*)/, async(req,res)=>{
+    let result = await Posts.findAll({where:{category:req.params[0]}})
+    const user = req.user ? req.user.user_id : null;
+    
+    res.render('category.ejs', {posts:result, user:user,dayjs:dayjs,cate:req.params[0]})
+})
+//카테고리 창
 
 app.get('/detail/:id', async(req,res)=>{
     let commentResult = await Comments.findAll({where:{post_id:req.params.id}})
@@ -279,14 +291,14 @@ app.post('/write',upload.single('img'), async(req, res) => {
 
     try{
     if(!req.user){
-        res.send('로그인 먼저 해주세요')
+        res.send("<script>alert('로그인 먼저 해주세요');window.location.replace('/login');</script>")
     }else{
         if(!req.file){
-        await Posts.create({title: req.body.title, content: req.body.content,user_id: req.user.user_id, image_url: null});
+        await Posts.create({title: req.body.title, content: req.body.content,user_id: req.user.user_id, image_url: null,category:req.body.category});
         console.log("성공")
         res.redirect('/list')
         }else{
-        await Posts.create({title: req.body.title, content: req.body.content,user_id: req.user.user_id, image_url: req.file.location});
+        await Posts.create({title: req.body.title, content: req.body.content,user_id: req.user.user_id, image_url: req.file.location, category:req.body.category});
         console.log("성공")
         res.redirect('/list')
         }
@@ -305,14 +317,12 @@ app.get('/update/:id', async(req,res)=>{
 app.put('/update/:id',upload.single('img'), async(req,res)=>{
 
     const before = await Posts.findOne({where:{post_id: req.params.id}})
-    if(req.body.img == null){
+    if(!req.file){
         await Posts.update({title:req.body.title, content:req.body.content, image_url:before.image_url},{where:{post_id: req.params.id}});
         res.send("<script>alert('수정완료!!'); window.location.replace('/list');</script>")
     }else{
         await Posts.update({title:req.body.title, content:req.body.content, image_url:req.file.location},{where:{post_id: req.params.id}});
         res.send("<script>alert('수정완료!!'); window.location.replace('/list');</script>")
     }
-
-    
 })
 

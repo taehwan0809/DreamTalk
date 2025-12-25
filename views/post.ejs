@@ -23,6 +23,33 @@
       <h4>글 작성</h4>
       <div id="write_area">
         <form enctype="multipart/form-data" action="/write" method="post">
+          <div class="category">
+            <p>카테고리</p>
+            <input type="radio" name="category" value="IT/개발" />IT/개발
+            <input type="radio" name="category" value="디자인" />디자인
+            <input
+              type="radio"
+              name="category"
+              value="비즈니스"
+            />비즈니스(경영/사무 등)
+            <input type="radio" name="category" value="공공/교육" />공공/교육
+            <input
+              type="radio"
+              name="category"
+              value="전문직"
+            />전문직(의료/과학 등)
+            <input
+              type="radio"
+              name="category"
+              value="서비스/현장"
+            />서비스/현장
+            <br />
+            <input
+              type="radio"
+              name="category"
+              value="미정/탐색"
+            />진로미정/탐색
+          </div>
           <div id="in_title">
             <textarea
               name="title"

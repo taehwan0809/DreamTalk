@@ -60,6 +60,8 @@ textarea{
 }
 
 #in_title {
+
+    padding-top: 3%;
     padding-bottom: 3%;
 }
 
@@ -123,4 +125,17 @@ label{
 .btn:hover{
     background-color: #6FA8DC;
     color: #fff;
+}
+
+
+.category p{
+    font-size: 19px;
+    margin-bottom: 0;
+    padding-bottom: 1%;
+
+}
+
+[type ="radio"]{
+    accent-color: #6FA8DC;
+    
 }
