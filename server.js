@@ -182,6 +182,11 @@ function nullCheck2(req,res,next){
 }
 
 
+app.get('/health', (req, res) => {
+  res.status(200).send("Success Health Check");
+})
+
+
 app.get('/', async(req,res) => {
     res.render('main.ejs')
 })
